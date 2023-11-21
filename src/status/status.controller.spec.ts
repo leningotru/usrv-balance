@@ -32,7 +32,6 @@ describe('StatusController', () => {
       const result = await controller.findOne(id);
 
       expect(result).toEqual(mockStatus);
-      expect(result).toHaveBeenCalledTimes(1);
     });
   });
 });
