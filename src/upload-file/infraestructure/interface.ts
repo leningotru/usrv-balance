@@ -4,5 +4,5 @@ interface CsvRow {
   account?: number | string;
   description?: number | string;
   status?: number | string;
-  date?: number | string;
+  date?:  string;
 }
