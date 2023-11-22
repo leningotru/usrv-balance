@@ -25,7 +25,7 @@ describe('StatusController', () => {
   describe('findOne', () => {
     it('should return a status by id', async () => {
       const mockStatus: Status = { id: 1, code: 400 };
-      const id:number = 1;
+      const id: number = 1;
 
       jest.spyOn(statusService, 'findOne').mockResolvedValue(mockStatus);
 

@@ -11,7 +11,6 @@ describe('StatusService', () => {
   const id: number = 1;
 
   beforeEach(async () => {
-    
     const module: TestingModule = await Test.createTestingModule({
       providers: [StatusService],
     }).compile();
@@ -31,7 +30,9 @@ describe('StatusService', () => {
   it('should fetch status by id', async () => {
     const mockStatus: Status = { id: 1, code: 245 };
 
-    axiosMock.onGet(`https://status.free.beeceptor.com/id/${id}`).reply(200, mockStatus);
+    axiosMock
+      .onGet(`https://status.free.beeceptor.com/id/${id}`)
+      .reply(200, mockStatus);
 
     const result = await service.findOne(id);
 
@@ -39,9 +40,12 @@ describe('StatusService', () => {
   });
 
   it('should handle error when fetching status by id', async () => {
+    axiosMock
+      .onGet(`https://status.free.beeceptor.com/id/${id}`)
+      .reply(500, 'Internal Server Error');
 
-    axiosMock.onGet(`https://status.free.beeceptor.com/id/${id}`).reply(500, 'Internal Server Error');
-
-    await expect(service.findOne(id)).rejects.toThrowError('Error fetching data for status #1');
+    await expect(service.findOne(id)).rejects.toThrowError(
+      'Error fetching data for status #1',
+    );
   });
 });
