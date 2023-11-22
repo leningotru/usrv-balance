@@ -6,13 +6,12 @@ import * as bodyParser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // Configura body-parser con el límite deseado
-  app.use(bodyParser.json({ limit: '100mb' }));
-  app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+  app.use(bodyParser.json({ limit: '5mb' }));
+  app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
   app.use(
     '/graphql',
-    graphqlUploadExpress({ maxFileSize: 100000000, maxFiles: 10 }),
+    graphqlUploadExpress({ maxFileSize: 5 * 1024 * 1024, maxFiles: 10 }),
   );
   app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(

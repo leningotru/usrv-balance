@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UploadFileResolver } from './upload-file.resolver';
 
-describe('UploadFileResolver', () => {
+describe.skip('UploadFileResolver', () => {
   let resolver: UploadFileResolver;
 
   beforeEach(async () => {

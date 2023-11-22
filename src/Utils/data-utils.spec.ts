@@ -1,4 +1,5 @@
 import { validateRow } from './data-utils';
+import { faker } from '@faker-js/faker';
 
 describe('validateRow', () => {
   let rows: CsvRow[];
@@ -17,7 +18,7 @@ describe('validateRow', () => {
       id: 1,
       balance: 100,
       account: 'INTERNAL',
-      description: 'Desc',
+      description: faker.string.alphanumeric(500),
       status: 'PENDING',
       date: new Date().toISOString(),
     };
@@ -29,11 +30,11 @@ describe('validateRow', () => {
   });
 
   test('should throw an error if the ID is not an integer', () => {
-    const row: CsvRow = {
+    const row = {
       id: 'non_integer',
       balance: 100,
       account: 'INTERNAL',
-      description: 'Desc',
+      description: faker.string.alphanumeric(500),
       status: 'PENDING',
       date: new Date().toISOString(),
     };
@@ -43,11 +44,11 @@ describe('validateRow', () => {
   });
 
   test('should throw an error if the balance is not a number', () => {
-    const row: CsvRow = {
+    const row = {
       id: 1,
       balance: 'non_number',
       account: 'INTERNAL',
-      description: 'Desc',
+      description: faker.string.alphanumeric(500),
       status: 'PENDING',
       date: new Date().toISOString(),
     };
@@ -61,7 +62,7 @@ describe('validateRow', () => {
       id: 1,
       balance: 100,
       account: 'INVALID',
-      description: 'Desc',
+      description: faker.string.alphanumeric(500),
       status: 'PENDING',
       date: new Date().toISOString(),
     };
@@ -89,7 +90,7 @@ describe('validateRow', () => {
       id: 1,
       balance: 100,
       account: 'INTERNAL',
-      description: 'Desc',
+      description: faker.string.alphanumeric(500),
       status: 'INVALID',
       date: new Date().toISOString(),
     };
@@ -103,7 +104,7 @@ describe('validateRow', () => {
       id: 1,
       balance: 100,
       account: 'INTERNAL',
-      description: 'Desc',
+      description: faker.string.alphanumeric(500),
       status: 'PENDING',
       date: 'invalid_date',
     };
@@ -117,11 +118,10 @@ describe('validateRow', () => {
       id: 1,
       balance: 100,
       account: 'INTERNAL',
-      description: 'Lorem ipsum dolor sit amet...',
+      description: faker.string.alphanumeric(500),
       status: 'PENDING',
       date: new Date().toISOString(),
     };
-
     validateRow(row, rows);
     expect(rows).toContainEqual(row);
   });
